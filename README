@@ -1,0 +1,14 @@
+This is a very simple GEANT4 package, based on version 10.7.0, for simulating DEGAi interactions with gamma rays. DEGAi is comprised of 13 Clover detectors here (1 hemisphere). The implantation detector is a 12 mm YSO. This is based on the experimental setup of e21062B.
+
+Some notes:
+-This package is not yet set up to run with GEANT4 macros. Any changes to the simulation will need to be made from within the source code, and the whole thing will need to be recompiled. Then, the simulation can be run interactively. This is not the most convenient or efficient, so consider modifying your version to include this capability.
+-The Clover.cc class is adopted from UCGretina (https://github.com/rileyle/UCGretina) with only minor changes.
+-There's some hard-coded stuff in here that was written for my specific use case and may not be generally applicable. I would advise to thoroughly read through the source code before working with it.
+
+--------------------TO RUN--------------------
+1. Check the Makefile (in build directory) carefully and make sure all file paths point to the correct locations. There are ~5 paths you may need to change.
+2. The following only needs to be done once. From your GEANT4 directory, type: cmake -B build/
+3. The following steps should be done any time you make changes to the source code. From your build directory, type: make clean; make 
+4. To execute a simulation, enter the interactive environment from inside your build directory by typing: sim
+5. To run N events, in the interactive command line, type: /run/beamOn N
+6. An output file called output.root will be generated inside your build directory. This output file contains a root tree with a branch of recorded simulated energies for each Clover crystal (52 branches for 13 Clovers).
