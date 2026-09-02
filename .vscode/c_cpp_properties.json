@@ -3,7 +3,11 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "/opt/root/include/**",
+                "/usr/include/**",
+                "/usr/local/include/**",
+                "/data/raeednawaf/GEANT4/geant4-v11.2.2-install/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

@@ -5,7 +5,7 @@
 #include "G4Event.hh"
 #include "G4SDManager.hh"
 
-#include "g4root.hh"
+// #include "g4root.hh"
 
 #include "RunAction.hh"
 #include "SteppingAction.hh"

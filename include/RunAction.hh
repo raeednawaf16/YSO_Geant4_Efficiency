@@ -2,7 +2,8 @@
 #define RUNACTION_HH
 
 #include "G4UserRunAction.hh"
-#include "g4root.hh"
+#include "G4AnalysisManager.hh"
+// #include "g4root.hh"
 #include "Constants.hh"
 
 class RunAction : public G4UserRunAction
