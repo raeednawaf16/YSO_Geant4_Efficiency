@@ -65,11 +65,35 @@ int main(int argc, char** argv)
 
 	G4UImanager *UImanager = G4UImanager::GetUIpointer();
 
-	UImanager->ApplyCommand("/control/execute init_vis.mac");
+	// UImanager->ApplyCommand("/control/execute init_vis.mac");
 	UImanager->ApplyCommand("/tracking/verbose 0");
 	UImanager->ApplyCommand("/process/had/rdm/nucleusLimits 152 152 63 63");
 
-	ui->SessionStart();
+
+  // Process macro or start UI session
+	if ( !ui ) { 
+		// batch mode
+		G4String command = "/control/execute ";
+		G4String fileName = argv[1];
+		UImanager->ApplyCommand(command+fileName);
+	}
+	else { 
+		// interactive mode
+		UImanager->ApplyCommand("/control/execute init_vis.mac");
+		ui->SessionStart();
+		delete ui;
+		delete visManager;
+	}
+
+	// ui->SessionStart();
+	
+	// Job termination
+	// Free the store: user actions, physics_list and detector_description are
+	// owned and deleted by the run manager, so they should not be deleted 
+	// in the main() program !
+
+	
+	delete runManager;
 
 	return 0;
 }

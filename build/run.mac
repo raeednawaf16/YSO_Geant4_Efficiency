@@ -1,0 +1,41 @@
+#
+# type "help" in the interactive shell for command
+#
+# endit vis.mac for visualization control
+
+# Initialize kernel, 
+/run/initialize
+/control/saveHistory
+
+
+/control/verbose 0
+/run/verbose 0
+/tracking/verbose 0
+/event/verbose 0
+/process/verbose 0
+
+#------ disable visualization
+/vis/disable
+/tracking/storeTrajectory 0
+
+#------ Sensitive detetcor verbose control
+/hits/verbose 1
+
+#-------override B-field
+/globalField/verbose 1
+/globalField/setValue 0.0 0.0 0.0 tesla
+
+#-------override particle, 
+#/gun/particle gamma
+#/gun/energy 6.13 MeV
+
+#-------Override Opening angle
+/Clover/generator/OpeningAngle  180 deg
+
+#-------Override output root file
+/analysis/setFileName output.root
+
+/run/printProgress 100000
+#/run/beamOn 1500000000
+/run/beamOn 5000000
+#/run/beamOn 20
