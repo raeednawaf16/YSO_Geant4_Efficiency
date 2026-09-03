@@ -1,7 +1,0 @@
-/data/raeednawaf/Raeed/GEANT-Ge-efficiency/build/CMakeFiles/install/strip.dir
-/data/raeednawaf/Raeed/GEANT-Ge-efficiency/build/CMakeFiles/install/local.dir
-/data/raeednawaf/Raeed/GEANT-Ge-efficiency/build/CMakeFiles/install.dir
-/data/raeednawaf/Raeed/GEANT-Ge-efficiency/build/CMakeFiles/list_install_components.dir
-/data/raeednawaf/Raeed/GEANT-Ge-efficiency/build/CMakeFiles/rebuild_cache.dir
-/data/raeednawaf/Raeed/GEANT-Ge-efficiency/build/CMakeFiles/edit_cache.dir
-/data/raeednawaf/Raeed/GEANT-Ge-efficiency/build/CMakeFiles/sim.dir
