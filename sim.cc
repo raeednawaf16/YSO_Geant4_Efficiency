@@ -82,7 +82,6 @@ int main(int argc, char** argv)
 		UImanager->ApplyCommand("/control/execute init_vis.mac");
 		ui->SessionStart();
 		delete ui;
-		delete visManager;
 	}
 
 	// ui->SessionStart();
@@ -92,7 +91,7 @@ int main(int argc, char** argv)
 	// owned and deleted by the run manager, so they should not be deleted 
 	// in the main() program !
 
-	
+	delete visManager;
 	delete runManager;
 
 	return 0;
