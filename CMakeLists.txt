@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.8...3.18)
 if(${CMAKE_VERSION} VERSION_LESS 3.12)
   cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
 endif()
-project(GEANT-Ge-efficiency)
+project(YSO_Geant4_efficiency)
 
 #----------------------------------------------------------------------------
 # Find Geant4 package, activating all available UI and Vis drivers by default
@@ -54,7 +54,6 @@ target_link_libraries(sim ${Geant4_LIBRARIES})
 set(CLOVER_SCRIPTS
   
 )
-
 foreach(_script ${CLOVER_SCRIPTS})
   configure_file(
     ${PROJECT_SOURCE_DIR}/${_script}

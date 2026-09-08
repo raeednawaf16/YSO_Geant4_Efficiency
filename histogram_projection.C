@@ -5,7 +5,7 @@
 
 void histogram_projection() {
     // 1. Open the source ROOT file containing the 2D histogram
-    TFile *inFile = TFile::Open("hist1238-00.root", "READ");
+    TFile *inFile = TFile::Open("hist1240-00.root", "READ");
     if (!inFile || inFile->IsZombie()) {
         printf("Error: Cannot open input file.\n");
         return;
@@ -20,7 +20,7 @@ void histogram_projection() {
     }
 
     // 3. Create a new output ROOT file
-    TFile *outFile = TFile::Open("output_projections_all.root", "RECREATE");
+    TFile *outFile = TFile::Open("output_projections_all_Co60.root", "RECREATE");
 
     // 4. Project ALL Y-bins onto the X-axis
     // By not specifying firstYBin and lastYBin, ROOT defaults to [1, GetNbinsY()]
