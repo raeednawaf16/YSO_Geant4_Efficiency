@@ -79,7 +79,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 	//G4ThreeVector pos(1.2*cm, 0.*cm, 0.625*cm);  // Halfway to edge in X
 	//G4ThreeVector pos(0.*cm, 0.*cm, 0.925*cm);  // Halfway to edge in Z
-	G4ThreeVector pos(0.*cm, 0.*cm, 0.625*cm);  // Center of YSO
+	G4ThreeVector pos(0.*cm, 0.*cm, -2.430*cm);  // Center of YSO
 	//G4ThreeVector pos(sourceX, sourceY, sourceZ-0.5*mm);
 	//G4ThreeVector pos(2.5*cm, 2.5*cm, 0.*cm);
 	fParticleGun->SetParticlePosition(pos);

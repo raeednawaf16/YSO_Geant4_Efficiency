@@ -1,0 +1,12 @@
+/control/verbose 0
+/run/verbose 0
+/tracking/verbose 0
+/event/verbose 0
+/process/verbose 0
+/vis/disable
+/tracking/storeTrajectory 0
+/hits/verbose 1
+/run/printProgress 100000
+/run/beamOn 5000000
+/analysis/h1/getVector
+/analysis/h2/getVector

@@ -34,6 +34,8 @@
 #include "PhysicsList.hh"
 #include "Constants.hh"
 
+#include "G4RunManagerFactory.hh"
+
 #include "G4RunManager.hh"
 #include "G4UImanager.hh"
 #include "QBBC.hh"
@@ -50,7 +52,9 @@ int main(int argc, char** argv)
 	CLHEP::HepRandom::setTheEngine(new CLHEP::MTwistEngine);
 	CLHEP::HepRandom::setTheSeed(time(NULL));
 
-	G4RunManager *runManager = new G4RunManager();
+	// G4RunManager *runManager = new G4RunManager();
+	// Construct the default run manager
+  	auto* runManager = G4RunManagerFactory::CreateRunManager(G4RunManagerType::Default);
 
 	runManager->SetUserInitialization(new DetectorConstruction());
 	runManager->SetUserInitialization(new PhysicsList());
@@ -59,6 +63,7 @@ int main(int argc, char** argv)
 	runManager->Initialize();
 
 	G4UIExecutive *ui = new G4UIExecutive(argc, argv);
+
 
 	G4VisManager *visManager = new G4VisExecutive();
 	visManager->Initialize();
@@ -71,7 +76,7 @@ int main(int argc, char** argv)
 
 
   // Process macro or start UI session
-	if ( !ui ) { 
+	if ( argc > 1 ) { 
 		// batch mode
 		G4String command = "/control/execute ";
 		G4String fileName = argv[1];

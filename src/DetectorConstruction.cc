@@ -123,6 +123,12 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	G4double yso_dxy = 4.8*cm, yso_dz = 1.2*cm;    
 	G4Box* yso_solid = new G4Box("YSO", 0.5*yso_dxy, 0.5*yso_dxy, 0.5*yso_dz);                       
 	yso_logic = new G4LogicalVolume(yso_solid, matY2SiO5, "YSO");
+
+	//----NEW for visualization----//
+	G4VisAttributes *vis_yso = new G4VisAttributes(G4Color(1.0, 1.0, 0.0, 0.6));
+	vis_yso->SetForceSolid(true);
+	yso_logic->SetVisAttributes(vis_yso);
+	// yso_logic->SetVisAttributes(G4VisAttributes::GetInvisible()); //---NEW!!---//
 		     
 	new G4PVPlacement(0, G4ThreeVector(originx, originy, originz), yso_logic, "YSO", logicWorld, false,0, checkOverlaps);
  
@@ -137,6 +143,13 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	G4VSolid* box_solid = new G4SubtractionSolid("Box", box_outer_solid, box_inner_solid, 0, G4ThreeVector());
 
 	G4LogicalVolume* box_logic = new G4LogicalVolume(box_solid, matABS, "Box");
+
+
+		//----NEW for visualization----//
+	G4VisAttributes *vis_box = new G4VisAttributes(G4Color(1.0, 1.0, 1.0));
+	vis_box->SetForceSolid(true);
+	box_logic->SetVisAttributes(vis_box);
+	// box_logic->SetVisAttributes(G4VisAttributes::GetInvisible()); //----NEW!!---//
 
 	double boxZ = -2.25*cm+originz+0.5*box_dz-0.5*yso_dz-box_wall;
 	if(boxZ - 0.5*box_dz != sourceZ)
@@ -169,8 +182,42 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
 	G4LogicalVolume* source_disc_logic = new G4LogicalVolume(source_disc_solid, matAl, "SourceDisc");
 
+
+	//----NEW for visualization----//
+	G4VisAttributes *vis_source_disc = new G4VisAttributes(G4Color(0.0, 1.0, 0.0));
+	vis_source_disc->SetForceWireframe(true);
+	source_disc_logic->SetVisAttributes(vis_source_disc);
+
+	// source_disc_logic->SetVisAttributes(G4VisAttributes::GetInvisible()); //---NEW!!!---//
+
 	//new G4PVPlacement(0, G4ThreeVector(sourceX, sourceY, sourceZ-0.5*discZ), source_disc_logic, "SourceDisc", logicWorld, false, 0, checkOverlaps);
 
+	// // Define a small sphere for the source (e.g., 0.5 mm radius)
+	// G4double sourceRadius = 0.5 * mm;
+	// G4Sphere* solidSource = new G4Sphere("SourceSphere", 0., sourceRadius, 0., 360.*deg, 0., 180.*deg);
+
+	// // Assign material (e.g., vacuum or same material as surrounding medium)
+	// G4LogicalVolume* logicSource = new G4LogicalVolume(solidSource, world_mat, "SourceLogic");
+
+	// Set visual attributes (Color: Red, Solid style)
+	// G4VisAttributes* sourceVisAttr = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0)); // Red (R, G, B)
+	// sourceVisAttr->SetForceSolid(true); // Makes it a solid sphere rather than wireframe
+	// logicSource->SetVisAttributes(sourceVisAttr);
+
+	// // Place it at the exact source position: (0, 0, 0.625 cm)
+	// G4double posZ_source = boxZ - 0.5*box_dz;
+	
+	// new G4PVPlacement(
+	// 	0,                                     // Rotation
+	// 	G4ThreeVector(0.0*cm, 0.*cm, posZ_source), // Position matching PrimaryGeneratorAction
+	// 	logicSource,                           // Logical volume
+	// 	"SourcePhys",                          // Name
+	// 	logicWorld,                            // Mother volume
+	// 	false,                                 // Boolean operation
+	// 	0,                                     // Copy number
+	// 	true                                   // Check overlaps
+	// );
+	
 	// Clover detector
 
 	// 4, 5, 6 original: 10.67*cm. 8, 9 original: 19.05*cm. 
@@ -195,6 +242,13 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	G4Box* quartz_solid = new G4Box("Quartz", 0.5*quartz_dxy, 0.5*quartz_dxy, 0.5*quartz_dz);
 		              
 	G4LogicalVolume* quartz_logic = new G4LogicalVolume(quartz_solid, matSiO2, "Quartz");
+
+	//----NEW for visualization----//
+	G4VisAttributes *vis_quartz = new G4VisAttributes(G4Color(0.6, 0.6, 0.6));
+	vis_quartz->SetForceWireframe(true);
+	quartz_logic->SetVisAttributes(vis_quartz);
+	// quartz_logic->SetVisAttributes(G4VisAttributes::GetInvisible()); //---NEW!!!---//
+
 		       
 	new G4PVPlacement(0, G4ThreeVector(originx, originy, originz+0.5*yso_dz+0.5*quartz_dz), quartz_logic, "Quartz", logicWorld, false, 0, checkOverlaps);
 
@@ -208,6 +262,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	G4Box* window_solid = new G4Box("Window", 0.5*window_dxy, 0.5*window_dxy, 0.5*window_dz);
 		              
 	G4LogicalVolume* window_logic = new G4LogicalVolume(window_solid, matPSPMT, "Window"); 
+
+	window_logic->SetVisAttributes(G4VisAttributes::GetInvisible()); //---NEW!!!---//
+
 		       
 	new G4PVPlacement(0, G4ThreeVector(originx, originy, originz + 0.5*yso_dz+quartz_dz+0.5*window_dz), window_logic, "Window", logicWorld, false, 0, checkOverlaps);
 
