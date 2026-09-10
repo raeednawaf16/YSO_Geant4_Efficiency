@@ -23,7 +23,18 @@ RunAction::RunAction()
     }
 
     man->FinishNtuple(0);
+
+    // // 1D Histograms for HDTV
+    // man->CreateH1("Total_Spectrum", "Total Energy All Crystals;Energy (keV);Counts", 3000, 0, 3000);
+
+    // for(int i = 0; i < ncrystals; i++){
+    //     char name[50], title[100];
+    //     sprintf(name, "spec_clover_%d", i);
+    //     sprintf(title, "Spectrum of Clover Crystal %d;Energy (keV);Counts", i);
+    //     man->CreateH1(name, title, 3000, 0, 3000);
+    // }
 }
+
 
 RunAction::~RunAction()
 {}

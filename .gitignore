@@ -4,3 +4,5 @@
 *.pcm
 *.d
 *.zip
+output.root
+build/output.root

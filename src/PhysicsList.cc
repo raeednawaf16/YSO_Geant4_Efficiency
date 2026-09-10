@@ -38,7 +38,7 @@ PhysicsList::PhysicsList()
 
 
   // Default physics
-  //RegisterPhysics(new G4RadioactiveDecayPhysics());
+  RegisterPhysics(new G4RadioactiveDecayPhysics());
   RegisterPhysics(new G4DecayPhysics());
 
   // EM physics
