@@ -4,10 +4,10 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/opt/root/include/**",
+                "/home/raeedlinux/root/include/**",
                 "/usr/include/**",
                 "/usr/local/include/**",
-                "/data/raeednawaf/GEANT4/geant4-v11.2.2-install/include"
+                "/home/raeedlinux/GEANT4/install/include/Geant4"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

@@ -263,7 +263,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 		              
 	G4LogicalVolume* window_logic = new G4LogicalVolume(window_solid, matPSPMT, "Window"); 
 
-	window_logic->SetVisAttributes(G4VisAttributes::GetInvisible()); //---NEW!!!---//
+	// window_logic->SetVisAttributes(G4VisAttributes::GetInvisible()); //---NEW!!!---//
 
 		       
 	new G4PVPlacement(0, G4ThreeVector(originx, originy, originz + 0.5*yso_dz+quartz_dz+0.5*window_dz), window_logic, "Window", logicWorld, false, 0, checkOverlaps);

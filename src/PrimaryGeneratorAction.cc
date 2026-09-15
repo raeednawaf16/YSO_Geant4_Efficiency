@@ -37,7 +37,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
 {
 	G4int n_particle = 1;
 	fParticleGun = new G4ParticleGun(n_particle);
-	sourceType = "gamma";
+	sourceType = "152Eu"; // default source type
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
