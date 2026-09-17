@@ -84,17 +84,5 @@
 ./Analyzer_C.so: /opt/root_6.26_02/include/TStyle.h
 ./Analyzer_C.so: /opt/root_6.26_02/include/TAttText.h
 ./Analyzer_C.so: /opt/root_6.26_02/include/TColor.h
-./Analyzer_C.so: /opt/root_6.26_02/include/TCanvas.h
-./Analyzer_C.so: /opt/root_6.26_02/include/TPad.h
-./Analyzer_C.so: /opt/root_6.26_02/include/TVirtualPad.h
-./Analyzer_C.so: /opt/root_6.26_02/include/TAttPad.h
-./Analyzer_C.so: /opt/root_6.26_02/include/TQObject.h
-./Analyzer_C.so: /opt/root_6.26_02/include/TVirtualQConnection.h
-./Analyzer_C.so: /opt/root_6.26_02/include/TInterpreter.h
-./Analyzer_C.so: /opt/root_6.26_02/include/TInterpreterValue.h
-./Analyzer_C.so: /opt/root_6.26_02/include/GuiTypes.h
-./Analyzer_C.so: /opt/root_6.26_02/include/Buttons.h
-./Analyzer_C.so: /opt/root_6.26_02/include/TAttBBox2D.h
-./Analyzer_C.so: /opt/root_6.26_02/include/TAttCanvas.h
 ./Analyzer_C.so: /opt/root_6.26_02/include/RVersion.h /opt/root_6.26_02/include/RConfig.h /opt/root_6.26_02/include/TClass.h /opt/root_6.26_02/include/TDictAttributeMap.h /opt/root_6.26_02/include/TInterpreter.h /opt/root_6.26_02/include/TROOT.h /opt/root_6.26_02/include/TBuffer.h /opt/root_6.26_02/include/TMemberInspector.h /opt/root_6.26_02/include/TError.h /opt/root_6.26_02/include/RtypesImp.h /opt/root_6.26_02/include/TIsAProxy.h /opt/root_6.26_02/include/TFileMergeInfo.h /opt/root_6.26_02/include/TCollectionProxyInfo.h /opt/root/bin/rootcling
 Analyzer_C__ROOTBUILDVERSION= 6.26/02

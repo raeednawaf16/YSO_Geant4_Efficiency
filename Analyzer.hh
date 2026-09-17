@@ -9,43 +9,23 @@
 
 // Header file for the classes stored in the TTree if any.
 #include <vector>
+#include<iostream>
 
 class Analyzer : public TSelector {
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
+   static const Int_t ncrystals = 52;
+
+   Double_t clover_energy[ncrystals];
+   
+   TH1D *h_total;
+   TH1D *h_clover[ncrystals];
 
 // Fixed size dimensions of array or collections stored in the TTree if any.
 
-   // Declaration of leaf types
-   Int_t           nTraj;
-   std::vector<double>  *energy;      // Added std::
-   std::vector<double>  *stepLength;   
-
-   // --- NEW: BGO Leaf types ---
-   std::vector<double>  *bgoE;
-   std::vector<double>  *bgoL;
-   
-   Double_t        bEnergy;
-   Double_t        theta;
-   Double_t        phi;
-   Double_t        totalBGO; // --- NEW: Total BGO energy ---
-
-   // List of branches
-   TBranch        *b_nTraj;   //!
-   TBranch        *b_energy;   //!
-   TBranch        *b_stepLength;   //!
-
-   // --- NEW: BGO Branches ---
-   TBranch        *b_bgoE;     //!
-   TBranch        *b_bgoL;     //!
-
-   TBranch        *b_bEnergy;   //!
-   TBranch        *b_theta;   //!
-   TBranch        *b_phi;   //!
-
-   TBranch        *b_totalBGO;  //! --- NEW: Total BGO Branch ---
-
-   Analyzer(TTree * /*tree*/ =0) : fChain(0) { }
+   Analyzer(TTree * /*tree*/ =0) : fChain(0), h_total(0) { 
+      for(int i = 0; i < ncrystals; i++) h_clover[i] = 0;
+   }
    virtual ~Analyzer() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
@@ -77,32 +57,16 @@ void Analyzer::Init(TTree *tree)
    // Init() will be called many times when running on PROOF
    // (once per file to be processed).
 
-   // Set object pointer
-   energy = 0;
-   stepLength = 0;
-
-   bgoE = 0; // --- NEW: Initialize BGO vector pointers to 0 ---
-   bgoL = 0; // --- NEW ---
 
    // Set branch addresses and branch pointers
    if (!tree) return;
    fChain = tree;
    fChain->SetMakeClass(1);
 
-   fChain->SetBranchAddress("nTraj", &nTraj, &b_nTraj);
-   fChain->SetBranchAddress("energy", &energy, &b_energy);
-   fChain->SetBranchAddress("stepLength", &stepLength, &b_stepLength);
-
-   // --- NEW: Set BGO Branch Addresses ---
-   fChain->SetBranchAddress("bgoEnergy", &bgoE, &b_bgoE);
-   fChain->SetBranchAddress("bgoStepLength", &bgoL, &b_bgoL);
-
-   fChain->SetBranchAddress("bEnergy", &bEnergy, &b_bEnergy);
-   fChain->SetBranchAddress("theta", &theta, &b_theta);
-   fChain->SetBranchAddress("phi", &phi, &b_phi);
-
-   // --- NEW: Set totalBGO Branch Address ---
-   fChain->SetBranchAddress("totalBGOenergy", &totalBGO, &b_totalBGO);
+   // Bind all 52 crystal energy branches
+   for(int i = 0; i < ncrystals; i++){
+      fChain->SetBranchAddress(Form("clover_energy_%d", i), &clover_energy[i]);
+   }
 }
 
 Bool_t Analyzer::Notify()
