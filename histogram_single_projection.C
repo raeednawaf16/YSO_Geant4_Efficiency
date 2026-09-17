@@ -5,7 +5,7 @@
 
 void histogram_single_projection() {
     // 1. Open the source ROOT file containing the 2D histogram
-    TFile *inFile = TFile::Open("hist1240-00.root", "READ");
+    TFile *inFile = TFile::Open("hist1238-00_44.root", "READ");
     if (!inFile || inFile->IsZombie()) {
         printf("Error: Cannot open input file.\n");
         return;
@@ -20,7 +20,7 @@ void histogram_single_projection() {
     }
 
     // 3. Create a new output ROOT file
-    TFile *outFile = TFile::Open("output_individual_projection.root", "RECREATE");
+    TFile *outFile = TFile::Open("output_152Eu_individual_projection.root", "RECREATE");
 
     // 4. Loop through all 52 channels individually
     for (int i = 1; i <= 52; ++i) {
@@ -41,5 +41,5 @@ void histogram_single_projection() {
     outFile->Close();
     inFile->Close();
 
-    printf("Successfully created individual channel projections in 'output_individual_channels.root'\n");
+    printf("Successfully created individual channel projections in 'output_152Eu_individual_channels.root'\n");
 }

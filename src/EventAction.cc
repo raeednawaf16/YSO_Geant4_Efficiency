@@ -49,13 +49,13 @@ void EventAction::EndOfEventAction(const G4Event* ev)
 			G4double nCrystalsHit = 0;
 
 			for (G4int i = 0; i < ncrystals; i++){
-				if (totalEdep[i] > 0) 
+				if (totalEdep[i] > 50) 
 					nCrystalsHit++;
 			}
 		
 			G4AnalysisManager *man = G4AnalysisManager::Instance();
 			
-		
+			
 			for(int i = 0; i < ncrystals; i++){					
 				// uncomment to "turn on" energy resolution
 				man->FillNtupleDColumn(0, i, totalEdep[i]/keV /*+  CLHEP::RandGauss::shoot(0, enRes)*/);
