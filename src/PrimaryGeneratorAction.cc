@@ -37,7 +37,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
 {
 	G4int n_particle = 1;
 	fParticleGun = new G4ParticleGun(n_particle);
-	sourceType = "152Eu"; // default source type
+	sourceType = "60Co"; // default source type
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -65,11 +65,11 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 		fParticleGun->SetParticleMomentumDirection(momdir);
 		fParticleGun->SetParticleDefinition(theParticle);
   	}
-	else if(sourceType == "152Eu"){
+	else if(sourceType == "60Co"){
 
-		G4ParticleDefinition* ion = G4IonTable::GetIonTable()->GetIon(63, 152);
+		G4ParticleDefinition* ion = G4IonTable::GetIonTable()->GetIon(27, 60);
 		  
-		fParticleGun->SetParticleEnergy(1*eV);
+		fParticleGun->SetParticleEnergy(0*eV);
 		fParticleGun->SetParticleDefinition(ion);
 	}
 	else{

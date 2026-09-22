@@ -6,6 +6,8 @@
 #include <TFile.h>
 #include <TSelector.h>
 #include <TH1F.h>
+#include <TH1D.h>
+#include <TH2D.h>
 
 // Header file for the classes stored in the TTree if any.
 #include <vector>
@@ -20,6 +22,7 @@ public :
    
    TH1D *h_total;
    TH1D *h_clover[ncrystals];
+   TH2D *h2_clovers; // Add this line for the 2D histogram
 
 // Fixed size dimensions of array or collections stored in the TTree if any.
 

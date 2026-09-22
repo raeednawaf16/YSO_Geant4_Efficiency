@@ -5,14 +5,14 @@
 
 void histogram_projection() {
     // 1. Open the source ROOT file containing the 2D histogram
-    TFile *inFile = TFile::Open("hist1240-00_44.root", "READ");
+    TFile *inFile = TFile::Open("Simulated.root", "READ");
     if (!inFile || inFile->IsZombie()) {
         printf("Error: Cannot open input file.\n");
         return;
     }
 
     // 2. Retrieve the 2D histogram
-    TH2F *h2 = (TH2F*)inFile->Get("hpge/addback"); // Replace with your TH2 name
+    TH2F *h2 = (TH2F*)inFile->Get("clovers"); // Replace with your TH2 name
     if (!h2) {
         printf("Error: Histogram not found.\n");
         inFile->Close();
@@ -20,12 +20,12 @@ void histogram_projection() {
     }
 
     // 3. Create a new output ROOT file
-    TFile *outFile = TFile::Open("addback_44_60Co_projections_all.root", "RECREATE");
+    TFile *outFile = TFile::Open("Simulated_projections_all.root", "RECREATE");
 
     // 4. Project ALL Y-bins onto the X-axis
     // By not specifying firstYBin and lastYBin, ROOT defaults to [1, GetNbinsY()]
     TH1D *h1_proj_all = h2->ProjectionX("xproj");
-    h1_proj_all->SetTitle("X projection bins [1 .. 100]");
+    h1_proj_all->SetTitle("X projection bins [1 .. 52]"); // Set the title for the projection histogram
 
 
     // 5. Write the 1D projection directly into the output ROOT file
@@ -37,5 +37,5 @@ void histogram_projection() {
     outFile->Close();
     inFile->Close();
 
-    printf("Successfully created projections in 'addback_44_60Co_projections_all.root'\n");
+    printf("Successfully created projections in 'Simulated_projections_all.root'\n");
 }
