@@ -27,7 +27,7 @@ Bool_t Analyzer::Process(Long64_t entry)
 {
    GetEntry(entry);
 
-   double threshold_keV = 0.0; // Filter low-energy noise and non-hits
+   double threshold_keV = 40.0; // Filter low-energy noise and non-hits
    // double total_energy_keV = 0.0;
    // double energy_kev = 0.0;
 

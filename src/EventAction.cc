@@ -58,7 +58,7 @@ void EventAction::EndOfEventAction(const G4Event* ev)
 			
 			for(int i = 0; i < ncrystals; i++){					
 				// uncomment to "turn on" energy resolution
-				man->FillNtupleDColumn(0, i, totalEdep[i]/keV /*+  CLHEP::RandGauss::shoot(0, enRes)*/);
+				man->FillNtupleDColumn(0, i, totalEdep[i]/keV +  CLHEP::RandGauss::shoot(0, enRes));
 			}	
 			
 
