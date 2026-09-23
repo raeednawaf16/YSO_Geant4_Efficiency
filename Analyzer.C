@@ -57,7 +57,7 @@ void Analyzer::SlaveTerminate() {}
 
 void Analyzer::Terminate()
 {
-TFile *outFile = new TFile("Simulated.root", "RECREATE");
+TFile *outFile = new TFile("Simulated_Implant.root", "RECREATE");
    
    // Write histograms directly to file
    if (h_total) h_total->Write();
@@ -70,5 +70,5 @@ TFile *outFile = new TFile("Simulated.root", "RECREATE");
    outFile->Close();
    delete outFile;
 
-   std::cout << "Successfully created Simulated.root with 2D spectra!" << std::endl;
+   std::cout << "Successfully created Simulated_Implant.root with 2D spectra!" << std::endl;
 }
