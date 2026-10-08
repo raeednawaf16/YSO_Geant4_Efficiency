@@ -72,7 +72,7 @@ class DetectorConstruction : public G4VUserDetectorConstruction
 	private:
 		G4LogicalVolume *yso_logic;
 
-		Clover* cloverArray[12];
+		Clover* cloverArray[13];
 
 };
 

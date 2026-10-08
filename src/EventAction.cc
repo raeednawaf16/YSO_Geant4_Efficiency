@@ -27,6 +27,19 @@ void EventAction::BeginOfEventAction(const G4Event* ev)
 void EventAction::EndOfEventAction(const G4Event* ev)
 {	
 	evt = ev;
+
+	// ================= EDIT: record the source (decay) position =================
+
+	G4AnalysisManager *am = G4AnalysisManager::Instance();
+	G4PrimaryVertex *vtx = evt->GetPrimaryVertex();
+	if (vtx) {
+		G4ThreeVector pos = vtx->GetPosition();
+		am->FillNtupleDColumn(1, 0, pos.x()/mm + 24.);
+		am->FillNtupleDColumn(1, 1, pos.y()/mm + 24.);
+		am->FillNtupleDColumn(1, 2, pos.z()/mm);
+		am->AddNtupleRow(1);
+	}
+	// ============================================================================
 	
 	G4HCofThisEvent * HCE = evt->GetHCofThisEvent();
 

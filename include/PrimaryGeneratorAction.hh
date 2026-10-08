@@ -51,6 +51,10 @@
 
 #include "Constants.hh"
 
+
+#include "ImplantProfileSampler.hh"   // ---NEW---Include the implant profile sampler class
+
+
 /// The primary generator action class with particle gum.
 ///
 /// The default kinematic is a 6 MeV gamma, randomly distribued 
@@ -77,10 +81,14 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     G4ParticleGun*  fParticleGun; // pointer a to G4 gun class
 
     G4String sourceType; // options are "gamma" or "152Eu"
+
+    //----NEW!!!---///
+    G4String fPosMode;
+    G4ThreeVector fFixedPos;
+    G4double fImplantZ;
+    ImplantProfileSampler* fSampler = nullptr;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #endif
-
-

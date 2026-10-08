@@ -12,6 +12,10 @@
 #include "TrackerGammaSD.hh"
 #include "Constants.hh"
 
+#include "G4AnalysisManager.hh"
+#include "G4PrimaryVertex.hh"
+#include "G4SystemOfUnits.hh"
+
 class EventAction : public G4UserEventAction
 {
 public:

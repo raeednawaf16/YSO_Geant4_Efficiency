@@ -24,6 +24,14 @@ RunAction::RunAction()
 
     man->FinishNtuple(0);
 
+
+    // EDIT: second ntuple with the decay position of every event (id 1)
+    man->CreateNtuple("vertex", "Decay positions");
+    man->CreateNtupleDColumn("x_mm");   // shifted to 0-48 mm like ysoProfile.root
+    man->CreateNtupleDColumn("y_mm");
+    man->CreateNtupleDColumn("z_mm");
+    man->FinishNtuple(1);
+
 }
 
 

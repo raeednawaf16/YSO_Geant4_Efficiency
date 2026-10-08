@@ -28,7 +28,9 @@
 /// \file PrimaryGeneratorAction.cc
 /// \brief Implementation of the PrimaryGeneratorAction class
 
-#include "PrimaryGeneratorAction.hh"    
+#include "PrimaryGeneratorAction.hh"
+#include "G4AnalysisManager.hh"
+    
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -40,6 +42,26 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
 	sourceType = "152Eu"; // default source type
 	// sourceType = "gamma"; // default source type
 
+	//---Source position mode---//
+	fPosMode = "implant"; // position mode "implant" or "fixed"
+
+	//---Used in fixed mode---//
+	fFixedPos = G4ThreeVector(0.0*cm, 0.0*cm, -2.425*cm); // default fixed position
+
+	// z used in "implant" mode.
+	// -2.425 cm : outer face of the implant box (same plane as your 13-point
+	//             scan, so the result is directly comparable to the
+	//             interpolated column of Weighted_efficiency.C)
+	// Inside YSO: front face is at z = 0.625 - 0.6 = 0.025 cm, so for decays
+	//             of implanted ions use e.g. 0.025*cm + implantDepth
+	fImplantZ = 0.625*cm;
+
+	if (fPosMode == "implant") {
+		// Histogram 0..48 mm  ->  YSO -24..+24 mm, so centre = (24, 24) mm.
+		// Histogram +x is assumed to be Geant4 +x (towards the clovers).
+		fSampler = new ImplantProfileSampler("implantXY_bins.txt", 24.0, 24.0, 0.024);
+	}
+
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -47,6 +69,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
 PrimaryGeneratorAction::~PrimaryGeneratorAction()
 {
   delete fParticleGun;
+  delete fSampler;
   //fgInstance = 0;
 }
 
@@ -82,10 +105,22 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 	// G4ThreeVector pos(1.2*cm, 0.*cm, 0.625*cm);  // Halfway to edge in X
 	//G4ThreeVector pos(0.*cm, 0.*cm, 0.925*cm);  // Halfway to edge in Z
-	// G4ThreeVector pos(0.*cm, 0.*cm, -0.625*cm);  // Center of YSO
+	// G4ThreeVector pos(0.*cm, 0.*cm, 0.625*cm);  // Center of YSO
 	//G4ThreeVector pos(sourceX, sourceY, sourceZ-0.5*mm);
-	G4ThreeVector pos(0.0*cm, 0.0*cm, -2.425*cm);	//Change the position of the source
+
+	G4ThreeVector pos;
+	if(fPosMode == "implant"){
+		G4double x, y;
+		fSampler->Sample(x, y);
+		pos = G4ThreeVector(x, y, fImplantZ);
+	}
+	else{
+		pos = fFixedPos;
+	}
+	// G4ThreeVector pos(0.0*cm, 0.0*cm, -2.425*cm);	//Change the position of the source
+
 	fParticleGun->SetParticlePosition(pos);
+
 
 	fParticleGun->GeneratePrimaryVertex(anEvent);
 }
