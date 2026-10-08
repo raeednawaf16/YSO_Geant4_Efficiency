@@ -39,14 +39,15 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
 {
 	G4int n_particle = 1;
 	fParticleGun = new G4ParticleGun(n_particle);
-	sourceType = "152Eu"; // default source type
+	sourceType = "60Co"; // default source type
 	// sourceType = "gamma"; // default source type
 
 	//---Source position mode---//
-	fPosMode = "implant"; // position mode "implant" or "fixed"
+	fPosMode = "fixed"; // position mode "implant" or "fixed"
 
 	//---Used in fixed mode---//
-	fFixedPos = G4ThreeVector(0.0*cm, 0.0*cm, -2.425*cm); // default fixed position
+	fFixedPos = G4ThreeVector(0.0*cm, 0.0*cm, -2.425*cm); // source outside the implant box
+	// fFixedPos = G4ThreeVector(0.0*cm, 0.0*cm, 0.625*cm); // source at the center of YSO 
 
 	// z used in "implant" mode.
 	// -2.425 cm : outer face of the implant box (same plane as your 13-point
@@ -90,14 +91,22 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 		fParticleGun->SetParticleMomentumDirection(momdir);
 		fParticleGun->SetParticleDefinition(theParticle);
   	}
-	else if(sourceType == "152Eu"){
+	// else if(sourceType == "152Eu"){
 
-		G4ParticleDefinition* ion = G4IonTable::GetIonTable()->GetIon(63, 152);
-		// G4ParticleDefinition* ion = G4IonTable::GetIonTable()->GetIon(27, 60);
+	// 	G4ParticleDefinition* ion = G4IonTable::GetIonTable()->GetIon(63, 152);
+		  
+	// 	fParticleGun->SetParticleEnergy(1*eV);
+	// 	fParticleGun->SetParticleDefinition(ion);
+	// }
+
+	else if(sourceType == "60Co"){
+
+		G4ParticleDefinition* ion = G4IonTable::GetIonTable()->GetIon(27, 60);
 		  
 		fParticleGun->SetParticleEnergy(1*eV);
 		fParticleGun->SetParticleDefinition(ion);
 	}
+
 	else{
 		G4cout << "ERROR: UNKNOWN SOURCE TYPE. EXITING." << G4endl;
 		exit(EXIT_FAILURE);
@@ -114,7 +123,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 		fSampler->Sample(x, y);
 		pos = G4ThreeVector(x, y, fImplantZ);
 	}
-	else{
+	else if (fPosMode == "fixed"){
 		pos = fFixedPos;
 	}
 	// G4ThreeVector pos(0.0*cm, 0.0*cm, -2.425*cm);	//Change the position of the source
